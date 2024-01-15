@@ -1,0 +1,45 @@
+{% extends "index.html" %}
+
+{% block block %}
+
+<nav class="navbar bg-body-tertiary">
+  <div class="container-fluid">
+    <form class="d-flex" role="search">
+      <input class="form-control me-2" name="search" type="search" placeholder="Search Address" aria-label="Search">
+      <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Sno.</th>
+      <th scope="col">Contributor Name </th>
+      <th scope="col">Phone Number </th>
+      <th scope="col">Email Address </th>
+      <th scope="col">Address </th>
+      <th scope="col">Food Available for </th>
+      <th scope="col">Actions </th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for contribution in contributions%}
+    <tr>
+      <th scope="row">{{forloop.counter}}</th>
+      <td>{{contribution.donor_name}}</td>
+      <td>{{contribution.phone}}</td>
+      <td>{{contribution.email}}</td>
+      <td>{{contribution.address}}</td>
+      <td>{{contribution.people}}</td>
+      <td>
+       <a href="/delete_entry/{{contribution.id}}/" class="btn btn-danger">Delete</a>
+
+       <a href="/update_entry/{{contribution.id}}/" class="btn btn-success">Update</a>
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}
