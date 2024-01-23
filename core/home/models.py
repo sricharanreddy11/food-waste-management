@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 
 class Contribution(models.Model):
-    user = models.ForeignKey(User, on_delete=models.SET_NULL,null=True,blank=True)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     donor_name = models.CharField(max_length=20)
     phone = models.CharField(max_length=10)
     email = models.EmailField(null=True)

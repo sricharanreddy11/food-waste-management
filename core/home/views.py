@@ -1,10 +1,13 @@
 from django.shortcuts import render,redirect
+from django.utils.decorators import method_decorator
+
 from home.models import *
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.views.generic import View
 
 
 def home(request):
@@ -28,15 +31,18 @@ def contribution(request):
     return render(request, "contribution.html")
 
 
-@login_required(login_url="/login_page/")
-def availability(request):
-    queryset = Contribution.objects.all()
-    if request.GET.get('search'):
-        queryset = queryset.filter(address__icontains=request.GET.get('search'))
-    context = {
-        'contributions': queryset
-    }
-    return render(request, "available.html", context)
+@method_decorator(login_required(login_url="/login_page/"), name='dispatch')
+class ContributionListView(View):
+    template_name = "available.html"
+
+    def get(self, request, *args, **kwargs):
+        queryset = Contribution.objects.all()
+        if request.GET.get('search'):
+            queryset = queryset.filter(address__icontains=request.GET.get('search'))
+        context = {
+            'contributions': queryset
+        }
+        return render(request, self.template_name, context)
 
 
 @login_required(login_url="/login_page/")

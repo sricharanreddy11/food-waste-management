@@ -1,11 +1,10 @@
 from django.urls import path
-
 from home.views import *
 
 urlpatterns = [
     path('', login_page, name='login_page'),
     path('contribute/', contribution, name='contribution'),
-    path('available/', availability, name="availability"),
+    path('available/', ContributionListView.as_view(), name="availability"),
     path('delete_entry/<id>/', delete_entry, name='delete_entry'),
     path('update_entry/<id>/', update_entry, name='update_entry'),
     path('dashboard/', dashboard, name='dashboard'),
