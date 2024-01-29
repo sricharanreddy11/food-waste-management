@@ -15,9 +15,6 @@
   <thead>
     <tr>
       <th scope="col">Sno.</th>
-      <th scope="col">Contributor Name </th>
-      <th scope="col">Phone Number </th>
-      <th scope="col">Email Address </th>
       <th scope="col">Address </th>
       <th scope="col">Food Available for </th>
       <th scope="col">Actions </th>
@@ -27,14 +24,11 @@
   {% for contribution in contributions%}
     <tr>
       <th scope="row">{{forloop.counter}}</th>
-      <td>{{contribution.donor_name}}</td>
-      <td>{{contribution.phone}}</td>
-      <td>{{contribution.email}}</td>
       <td>{{contribution.address}}</td>
       <td>{{contribution.people}}</td>
       <td>
        <a href="/delete_entry/{{contribution.id}}/" class="btn btn-danger">Delete</a>
-
+        <a href="/available/{{contribution.id}}/" class="btn btn-info">View</a>
        <a href="/update_entry/{{contribution.id}}/" class="btn btn-success">Update</a>
       </td>
     </tr>

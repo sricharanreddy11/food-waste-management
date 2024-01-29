@@ -1,4 +1,6 @@
-from django.shortcuts import render,redirect
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 
 from home.models import *
@@ -7,42 +9,87 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.views.generic import View
+from django.views.generic import View,ListView, DetailView, CreateView, UpdateView, DeleteView
 
 
 def home(request):
     return render(request, "index.html")
 
 
-@login_required(login_url="/login_page/")
-def contribution(request):
-    if request.method == 'POST':
-        data = request.POST
-        donor_name = data.get("donor_name")
-        address = data.get("address")
-        phone = data.get("phone")
-        email = data.get("email")
-        people = data.get("people")
-        # print(donor_name)
-        # print(address)
-        # print(people)
-        Contribution.objects.create(donor_name=donor_name,  phone=phone, email=email, address=address, people=people)
-        return redirect(request.path)
-    return render(request, "contribution.html")
-
-
-@method_decorator(login_required(login_url="/login_page/"), name='dispatch')
-class ContributionListView(View):
-    template_name = "available.html"
+class ContributionView(LoginRequiredMixin, View):
+    template_name = "dashboard.html"
+    login_url = "/login_page/"
 
     def get(self, request, *args, **kwargs):
-        queryset = Contribution.objects.all()
-        if request.GET.get('search'):
-            queryset = queryset.filter(address__icontains=request.GET.get('search'))
+        contributions = Contribution.objects.all()
+        total_people = sum(query.people for query in contributions)
+
         context = {
-            'contributions': queryset
+            'total_people': total_people,
         }
+
         return render(request, self.template_name, context)
+
+
+class ContributionCreateView(LoginRequiredMixin, CreateView):
+    template_name = "contribution_form.html"
+    model = Contribution
+    context_object_name = "form"
+    fields = ["donor_name", "address", "phone", "email", "people"]
+    success_url = reverse_lazy('contribution')
+
+    def get_queryset(self):
+        base_qs = super(ContributionCreateView, self).get_queryset()
+        return base_qs.filter(user=self.request.user)
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        messages.success(self.request, "Contribution Created Successfully")
+        return super(ContributionCreateView, self).form_valid(form)
+
+
+class ContributionUpdateView(LoginRequiredMixin, UpdateView):
+    template_name = "contribution_form.html"
+    model = Contribution
+    context_object_name = "query"
+    fields = ["donor_name", "address", "phone", "email", "people"]
+    success_url = reverse_lazy('contribution')
+
+    def get_queryset(self):
+        base_qs = super(ContributionUpdateView, self).get_queryset()
+        return base_qs.filter(user=self.request.user)
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        messages.success(self.request, "Contribution updated Successfully")
+        return super(ContributionUpdateView, self).form_valid(form)
+
+
+class ContributionListView(LoginRequiredMixin, ListView):
+    template_name = "contribution_list.html"
+    login_url = '/login_page/'
+    model = Contribution
+    context_object_name = "contributions"
+
+    def get_queryset(self):
+        base_qs = super(ContributionListView, self).get_queryset()
+        return base_qs.filter(user=self.request.user)
+
+
+class ContributionDetailView(LoginRequiredMixin, DetailView):
+    template_name = "contribution_detail.html"
+    model = Contribution
+    context_object_name = "contribution"
+
+    def get_queryset(self):
+        base_qs = super(ContributionDetailView, self).get_queryset()
+        return base_qs.filter(user=self.request.user)
+
+    def get_object(self, queryset=None):
+        return get_object_or_404(Contribution, pk=self.kwargs['pk'])
+
+
+# class ContributionDeleteView(LoginRequiredMixin, DeleteView):
 
 
 @login_required(login_url="/login_page/")
@@ -50,36 +97,6 @@ def delete_entry(request,id):
     query = Contribution.objects.filter(id=id)
     query.delete()
     return redirect('/available/')
-
-
-@login_required(login_url="/login_page/")
-def update_entry(request,id):
-    query = Contribution.objects.get(id=id)
-    if request.method == "POST":
-        data = request.POST
-        query.donor_name = data.get("donor_name")
-        query.address = data.get("address")
-        query.phone = data.get("phone")
-        query.email = data.get("email")
-        query.people = data.get("people")
-        query.save()
-        return redirect('/available/')
-    context = {
-        'query': query
-    }
-    return render(request, "update_page.html", context)
-
-
-@login_required(login_url="/login_page/")
-def dashboard(request):
-    total_people = 0
-    queries = Contribution.objects.all()
-    for query in queries:
-        total_people += query.people
-    context = {
-        'total_people': total_people,
-    }
-    return render(request, "dashboard.html", context)
 
 
 def login_page(request):
