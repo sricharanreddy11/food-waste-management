@@ -9,5 +9,4 @@ class Contribution(models.Model):
     email = models.EmailField(null=True)
     address = models.TextField(null=False)
     people = models.IntegerField(default=10)
-
-
+    requests = models.IntegerField(default=0)

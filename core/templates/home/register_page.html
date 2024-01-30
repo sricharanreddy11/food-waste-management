@@ -15,7 +15,7 @@
     </div>
     {% endif %}
     <div class = "container">
-        <form method="post" enctype="multipart/form-data">
+        <form class="border" style="padding: 10%" method="post" enctype="multipart/form-data" action="{% url 'register_page' %}">
           {% csrf_token %}
       <div class="mb-3">
         <label for="first_name" class="form-label">First Name</label>
@@ -30,11 +30,20 @@
         <input type="text" name="username" required class="form-control" id="username" aria-describedby="emailHelp">
       </div>
       <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Password</label>
-        <input type="password" required class="form-control" name="password" id="exampleInputPassword1">
+       <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" name="email" required class="form-control" id="email" aria-describedby="emailHelp">
       </div>
       <div class="mb-3">
-          <p>Already have an Account :<a href="/login_page/">Login</a></p>
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input type="password" required class="form-control" name="password1" id="exampleInputPassword1">
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword2" class="form-label">Re-enter Password</label>
+        <input type="password" required class="form-control" name="password2" id="exampleInputPassword2">
+      </div>
+      <div class="mb-3">
+          <p>Already have an Account :<a class="btn" href="/login_page/">Login</a></p>
       </div>
       <button type="submit"  class="btn btn-primary">Submit</button>
         </form>

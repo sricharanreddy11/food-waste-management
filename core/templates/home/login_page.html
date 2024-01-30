@@ -6,7 +6,7 @@
   <div class="form-group col-md-5 col-md-offset-7 align-center ">
 
     <div class = "container">
-        <form method="post" enctype="multipart/form-data" >
+        <form class="border" style="padding: 10%" method="post" enctype="multipart/form-data" >
           {% csrf_token %}
        {% for message in messages %}
       <div class="p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3">
@@ -22,7 +22,7 @@
         <input type="password" name="password" class="form-control" id="exampleInputPassword1">
       </div>
       <div class="mb-3">
-          <p>Don't have an Account :<a href="/register_page/">Register</a></p>
+          <p>Don't have an Account :<a class="btn" href="/register_page/">Register</a></p>
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
         </form>

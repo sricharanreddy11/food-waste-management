@@ -1,30 +1,44 @@
 {% extends "index.html" %}
 
 {% block block %}
-<div class = "container" style="display : flex;flex-direction: column; justify-content: center; align-items : center;justify-content :space-between ; height : 90vh">
-<div class = "container" style="display : flex; justify-content: center; align-self : center;justify-content :space-around">
-<div class="card text-center" style="width: 18rem;">
+<div class="container" style="display : flex; flex-direction : column; justify-content : space-between; gap : 50px">
+
+<div class="container" style="display : flex; flex-direction : row; justify-content : space-around">
+
+<div class="card" style="width: 18rem;">
   <div class="card-body">
-    <h5 class="card-title">Contribute</h5>
-    <p class="card-text">Join us in the fight against food waste! Share your surplus meals, make a difference. Contribute now and help nourish those in need</p>
-    <a href="/contribute/" class="btn btn-primary">contribute</a>
+    <h5 class="card-title">Food Available for</h5>
+    <h2 class="card-text">{{total_people}} Members</h2>
+    <a href="/contribute" class="card-link">Contribute</a>
   </div>
 </div>
 
-<div class="card text-center" style="width: 18rem;">
+<div class="card" style="width: 18rem;">
   <div class="card-body">
-    <h5 class="card-title">Deliver</h5>
-    <p class="card-text"> Lend a helping hand by delivering surplus food to those who need it most.Become a part of our mission eliminate food waste</p>
-    <a href="/available/" class="btn btn-primary">deliver</a>
+    <h5 class="card-title">No. of Donations Made</h5>
+    <h2 class="card-text">{{total_count}}</h2>
+    <a href="/contribute" class="card-link">Donate</a>
+  </div>
+</div>
+
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Total requests</h5>
+    <h2 class="card-text">{{total_request}}</h2>
+    <a href="#" class="card-link">Handle Requests</a>
   </div>
 </div>
 </div>
 
-<div class="card text-bg-success mb-3" style="max-width: 80rem;">
+{%if request.user.is_staff %}
+  <div class="card container" style="width: 18rem;">
   <div class="card-body">
-    <h5 class="card-title">Every Contribution and Delivery makes Impact</h5>
-    <p class="card-text">Food Available currently for {{total_people}} Members</p>
+    <h5 class="card-title">Total Contributors</h5>
+    <h2 class="card-text">{{total_users}}</h2>
+    <a href="#" class="card-link">Contributors</a>
   </div>
 </div>
-  </div>
+{%endif%}
+
+</div>
 {% endblock %}
