@@ -37,7 +37,7 @@ def request_entry(request, pk):
 
 class ContributionView(LoginRequiredMixin, View):
     template_name = "dashboard.html"
-    login_url = "/login_page/"
+    login_url = "/auth/login_page/"
 
     def get_queryset(self):
         base_qs = Contribution.objects.all()
@@ -67,7 +67,7 @@ class ContributionView(LoginRequiredMixin, View):
 
 class ContributionCreateView(LoginRequiredMixin, CreateView):
     template_name = "contribution_form.html"
-    login_url = "/login_page/"
+    login_url = "/auth/login_page/"
     model = Contribution
     context_object_name = "form"
     fields = ["donor_name", "address", "phone", "email", "people"]
@@ -85,7 +85,7 @@ class ContributionCreateView(LoginRequiredMixin, CreateView):
 
 class ContributionListView(ListView):
     template_name = "contribution_list.html"
-    login_url = '/login_page/'
+    login_url = '/auth/login_page/'
     model = Contribution
     context_object_name = "contributions"
 
@@ -141,7 +141,7 @@ class ContributionDeleteView(LoginRequiredMixin, DeleteView):
     model = Contribution
     context_object_name = "contribution"
     template_name = "contribution_confirm_delete.html"
-    login_url = "/login_page/"
+    login_url = "/auth/login_page/"
     success_url = reverse_lazy('availability')
 
     def get_queryset(self):
@@ -159,53 +159,6 @@ class ContributionDeleteView(LoginRequiredMixin, DeleteView):
 """
     Function Based Views for Authentication
 """
-
-
-def login_page(request):
-    if request.method == "POST":
-        username = request.POST.get("username")
-        password = request.POST.get("password")
-        if not User.objects.filter(username=username).exists():
-            messages.error(request, "User Doesn't Exist, Please Register")
-            return redirect('/register_page/')
-        user = authenticate(username=username, password=password)
-        if user is None:
-            messages.error(request, "Password Entered Incorrect")
-            return redirect('/login_page')
-        else:
-            login(request, user)
-            return redirect('/dashboard/')
-    return render(request, "login_page.html")
-
-
-@login_required(login_url="/login_page/")
-def logout_page(request):
-    logout(request)
-    return redirect('/')
-
-
-def register_page(request):
-    if request.method == "POST":
-        first_name = request.POST.get("first_name")
-        last_name = request.POST.get("last_name")
-        username = request.POST.get("username")
-        email = request.POST.get("email")
-        password1 = request.POST.get("password1")
-        password2 = request.POST.get("password2")
-        if (User.objects.filter(username=username)).exists():
-            messages.info(request, "Username Already Exists")
-            return redirect('/register_page/')
-        if password1 != password2:
-            messages.info(request, "Passwords Did not match")
-            return redirect('/register_page/')
-
-        user = User.objects.create(first_name=first_name, last_name=last_name, username=username)
-        user.set_password(password1)
-        user.save()
-        messages.info(request, "User Created Successfully")
-        return redirect('/register_page/')
-    return render(request, "register_page.html")
-
 
 
 # class MyLoginView(LoginView):

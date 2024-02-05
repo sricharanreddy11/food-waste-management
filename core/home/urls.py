@@ -1,6 +1,7 @@
 from django.urls import path,include
 
-from home.api import urls
+from home.api import urls as api_urls
+from auth import urls as auth_urls
 from home.views import *
 
 urlpatterns = [
@@ -11,10 +12,8 @@ urlpatterns = [
     path('available/<int:pk>/delete/', ContributionDeleteView.as_view(), name='delete_entry'),
     path('available/<int:pk>/update/', ContributionUpdateView.as_view(), name='update_entry'),
     path('dashboard/', ContributionView.as_view(), name='dashboard'),
-    path('login_page/', login_page, name='login_page'),
-    path('register_page/', register_page, name='register_page'),
-    path('logout_page/', logout_page, name='logout_page'),
     path("available/<pk>/request/", request_entry, name="request_entry"),
 
-    path("api/", include(urls)),
+    path("api/", include(api_urls)),
+    path("auth/", include(auth_urls)),
 ]
