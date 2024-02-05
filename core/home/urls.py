@@ -1,4 +1,6 @@
-from django.urls import path
+from django.urls import path,include
+
+from home.api import urls
 from home.views import *
 
 urlpatterns = [
@@ -12,6 +14,7 @@ urlpatterns = [
     path('login_page/', login_page, name='login_page'),
     path('register_page/', register_page, name='register_page'),
     path('logout_page/', logout_page, name='logout_page'),
+    path("available/<pk>/request/", request_entry, name="request_entry"),
 
-    path("available/<pk>/request/", request_entry, name="request_entry")
+    path("api/", include(urls)),
 ]
