@@ -22,18 +22,27 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/dashboard/">Home</a>
         </li>
+
         {%if request.user.is_authenticated%}
         <li class="nav-item">
           <a class="nav-link" href="/contribute/">Contribute</a>
         </li>
-        {%else%}
-        <li class="nav-item">
-          <a class="nav-link" href='#'>About</a>
-        </li>
-        {%endif%}
         <li class="nav-item">
           <a class="nav-link" href="/available/">Available</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/my-contribution/">My Contributions</a>
+        </li>
+
+        {%else%}
+        <li class="nav-item">
+          <a class="nav-link" href='/about/'>About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Donate</a>
+        </li>
+        {%endif%}
+
       </ul>
       <form class="d-flex" role="search">
         <div style="padding : 10px">
@@ -52,7 +61,6 @@
 </nav>
 <br>
 <br>
-
 {%block block%}
 
         {% endblock %}

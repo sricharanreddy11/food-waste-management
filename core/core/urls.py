@@ -20,5 +20,6 @@ from home.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include("home.urls"))   # we can add anything here to make it a routed url for multiple applications
+    path('', include("home.urls")),   # we can add anything here to make it a routed url for multiple applications
+    path('chat/', include("room.urls")),
 ]
