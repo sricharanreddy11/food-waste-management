@@ -139,6 +139,11 @@ STATICFILES_DIRS = [
     STATIC_DIR,
 ]
 
+GOOGLE_API_KEY = "AIzaSyAnu7ZmYB6qKGA2ODGpkqDkO1OAzEdaLS4"
+
+RECAPTCHA_KEY = "6LdT4XQpAAAAALNtFP1zc-Rd2ak2ARooelrlPcg_"
+RECAPTCHA_SECRET_KEY = "6LdT4XQpAAAAAKBDFJpWFO18F-1VQlhMLa-vK3zO"
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 

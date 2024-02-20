@@ -101,7 +101,7 @@ class ContributionListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         if self.request.user.is_authenticated:
             base_qs = super(ContributionListView, self).get_queryset()
-            return base_qs
+            return base_qs.exclude(user=self.request.user)
 
 
 class ContributionDetailView(LoginRequiredMixin, DetailView):
