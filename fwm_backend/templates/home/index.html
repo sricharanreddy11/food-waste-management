@@ -37,9 +37,9 @@
     </button>
     <div class="hidden md:flex md:items-center w-full md:w-auto" id="nav-content">
       <ul class="flex flex-col md:flex-row md:space-x-6">
-        <li><a class="text-white hover:text-gray-200" href="/dashboard/">Home</a></li>
 
         {% if request.user.is_authenticated %}
+        <li><a class="text-white hover:text-gray-200" href="/dashboard/">Dashboard</a></li>
         <li><a class="text-white hover:text-gray-200" href="/contribute/">Contribute</a></li>
         <li><a class="text-white hover:text-gray-200" href="/available/">Available</a></li>
         <li><a class="text-white hover:text-gray-200" href="/my-contribution/">My Contributions</a></li>

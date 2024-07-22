@@ -19,7 +19,7 @@ def login_page(request):
             return redirect('/auth/login_page')
         else:
             login(request, user)
-            return redirect('/dashboard/')
+            return redirect('/')
     return render(request, "auth/login_page.html")
 
 
