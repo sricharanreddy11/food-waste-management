@@ -1,33 +1,32 @@
 {% extends "home/index.html" %}
 
-{%block block%}
-<div class="container">
- <div class="row justify-content-center ">
-  <div class="form-group col-md-5 col-md-offset-7 align-center ">
-
-    <div class = "container">
-        <form class="border" style="padding: 10%" method="post" enctype="multipart/form-data" >
+{% block block %}
+<div class="container mx-auto mt-8">
+  <div class="flex justify-center">
+    <div class="w-full max-w-md">
+      <div class="bg-white p-6 rounded-lg shadow-lg">
+        <form method="post" enctype="multipart/form-data">
           {% csrf_token %}
-       {% for message in messages %}
-      <div class="p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3">
-        <p>{{ message }}</p>
-        </div>
-            {% endfor %}
-      <div class="mb-3">
-        <label for="username" class="form-label">Username</label>
-        <input type="text" name="username" required class="form-control" id="username" aria-describedby="emailHelp">
-      </div>
-      <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Password</label>
-        <input type="password" name="password" class="form-control" id="exampleInputPassword1">
-      </div>
-      <div class="mb-3">
-          <p>Don't have an Account :<a class="btn" href="/auth/register_page/">Register</a></p>
-      </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+          {% for message in messages %}
+          <div class="mb-4 p-3 text-blue-900 bg-blue-100 border border-blue-200 rounded-lg">
+            <p>{{ message }}</p>
+          </div>
+          {% endfor %}
+          <div class="mb-4">
+            <label for="username" class="block text-gray-700">Username</label>
+            <input type="text" name="username" required class="mt-1 p-2 w-full border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" id="username" aria-describedby="emailHelp">
+          </div>
+          <div class="mb-4">
+            <label for="exampleInputPassword1" class="block text-gray-700">Password</label>
+            <input type="password" name="password" class="mt-1 p-2 w-full border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" id="exampleInputPassword1">
+          </div>
+          <div class="mb-4">
+            <p class="text-gray-700">Don't have an Account? <a class="text-blue-500 hover:underline" href="/auth/register_page/">Register</a></p>
+          </div>
+          <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600">Submit</button>
         </form>
+      </div>
     </div>
-        </div>
- </div>
+  </div>
 </div>
 {% endblock %}

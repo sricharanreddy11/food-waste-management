@@ -1,42 +1,41 @@
 {% extends "home/index.html" %}
 
-{%block block%}
-<div class="container">
- <div class="row justify-content-center ">
-  <div class="form-group col-md-5 col-md-offset-7 align-center ">
- <div class = "container">
-    <form class="border" style="padding: 10%" method="post" enctype="multipart/form-data">
-      {% csrf_token %}
-        {% for message in messages %}
-      <div class="p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3">
-        <p>{{ message }}</p>
-        </div>
-            {% endfor %}
-  <div class="mb-3">
-    <label for="donor-name" class="form-label">Contributor-Name: </label>
-    <input type="text" class="form-control" required id="donor-name" aria-describedby="emailHelp" name="donor_name" value="{{query.donor_name}}">
-  </div>
-  <div class="mb-3">
-    <label for="floatingTextarea">Address: </label>
-    <textarea class="form-control" required placeholder="Add the respective Address to Visit" id="floatingTextarea" name="address">{{query.address}}</textarea>
-  </div>
-  <div class="mb-3">
-    <label for="phone" class="form-label">Phone Number: </label>
-    <input type="text" class="form-control" required id="phone" aria-describedby="emailHelp" name="phone" value="{{query.phone}}">
-  </div>
-  <div class="mb-3">
-    <label for="email" class="form-label">Email-Id: </label>
-    <input type="email" class="form-control" required id="email" aria-describedby="emailHelp" name="email" value="{{query.email}}">
-  </div>
-  <div class="mb-3">
-    <label for="people" class="form-label">No. Of People : </label>
-    <input type="number" class="form-control" required id="people" aria-describedby="emailHelp" name="people" value="{{query.people}}">
-  </div>
-  <button type="submit" class="btn btn-primary">Update</button>
-    </form>
+{% block block %}
+<div class="container mx-auto">
+  <div class="flex justify-center">
+    <div class="w-full max-w-md">
+      <div class="bg-white shadow-md rounded-lg p-8">
+        <form class="space-y-6" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          {% for message in messages %}
+            <div class="p-3 text-blue-700 bg-blue-100 border border-blue-200 rounded-lg mb-4">
+              <p>{{ message }}</p>
+            </div>
+          {% endfor %}
+          <div class="mb-4">
+            <label for="donor-name" class="block text-gray-700">Contributor-Name:</label>
+            <input type="text" class="form-input p-2 mt-1 block w-full rounded-md border-gray-300 shadow-sm" required id="donor-name" name="donor_name" value="{{ query.donor_name }}">
+          </div>
+          <div class="mb-4">
+            <label for="floatingTextarea" class="block text-gray-700">Address:</label>
+            <textarea class="form-textarea mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm" required id="floatingTextarea" name="address" placeholder="Add the respective Address to Visit">{{ query.address }}</textarea>
+          </div>
+          <div class="mb-4">
+            <label for="phone" class="block text-gray-700">Phone Number:</label>
+            <input type="text" class="form-input mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm" required id="phone" name="phone" value="{{ query.phone }}">
+          </div>
+          <div class="mb-4">
+            <label for="email" class="block text-gray-700">Email-Id:</label>
+            <input type="email" class="form-input mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm" required id="email" name="email" value="{{ query.email }}">
+          </div>
+          <div class="mb-4">
+            <label for="people" class="block text-gray-700">No. Of People:</label>
+            <input type="number" class="form-input mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm" required id="people" name="people" value="{{ query.people }}">
+          </div>
+          <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300">Update</button>
+        </form>
+      </div>
     </div>
   </div>
- </div>
 </div>
-
 {% endblock %}

@@ -1,44 +1,81 @@
 {% extends "home/index.html" %}
 
 {% block block %}
-<div class="container" style="display : flex; flex-direction : column; justify-content : space-between; gap : 50px">
+<main class="flex-1 p-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
+            <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                <div class="p-6">
+                    <h5 class="text-xl font-semibold text-gray-700 mb-2">Food Available for</h5>
+                    <h2 class="text-4xl font-bold text-green-600 mb-4">{{ total_people }} Members</h2>
+                    <a href="/contribute" class="text-blue-500 hover:text-blue-600">Contribute</a>
+                </div>
+            </div>
 
-<div class="container" style="display : flex; flex-direction : row; justify-content : space-around">
+            <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                <div class="p-6">
+                    <h5 class="text-xl font-semibold text-gray-700 mb-2">No. of Donations Made</h5>
+                    <h2 class="text-4xl font-bold text-green-600 mb-4">{{ total_count }}</h2>
+                    <a href="/contribute" class="text-blue-500 hover:text-blue-600">Donate</a>
+                </div>
+            </div>
 
-<div class="card" style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title">Food Available for</h5>
-    <h2 class="card-text">{{total_people}} Members</h2>
-    <a href="/contribute" class="card-link">Contribute</a>
-  </div>
+            <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                <div class="p-6">
+                    <h5 class="text-xl font-semibold text-gray-700 mb-2">Total Requests</h5>
+                    <h2 class="text-4xl font-bold text-green-600 mb-4">{{ total_request }}</h2>
+                    <a href="#" class="text-blue-500 hover:text-blue-600">Handle Requests</a>
+                </div>
+            </div>
+
+            {% if request.user.is_staff %}
+            <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                <div class="p-6">
+                    <h5 class="text-xl font-semibold text-gray-700 mb-2">Total Contributors</h5>
+                    <h2 class="text-4xl font-bold text-green-600 mb-4">{{ total_users }}</h2>
+                    <a href="#" class="text-blue-500 hover:text-blue-600">Contributors</a>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Chart Section -->
+        <div class="bg-white shadow-lg rounded-lg p-6 mb-8">
+            <h5 class="text-xl font-semibold text-gray-700 mb-4">Data Overview</h5>
+            <div class="chart-container">
+                <canvas id="dataChart"></canvas>
+            </div>
+        </div>
+
+        <!-- More Content (if needed) -->
+        <!-- <div class="bg-white shadow-lg rounded-lg p-6">
+            <h5 class="text-xl font-semibold text-gray-700 mb-4">Additional Info</h5>
+            <!-- Add more content here if needed -->
+        </div> -->
+    </main>
 </div>
 
-<div class="card" style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title">No. of Donations Made</h5>
-    <h2 class="card-text">{{total_count}}</h2>
-    <a href="/contribute" class="card-link">Donate</a>
-  </div>
-</div>
-
-<div class="card" style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title">Total requests</h5>
-    <h2 class="card-text">{{total_request}}</h2>
-    <a href="#" class="card-link">Handle Requests</a>
-  </div>
-</div>
-</div>
-
-{%if request.user.is_staff %}
-  <div class="card container" style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title">Total Contributors</h5>
-    <h2 class="card-text">{{total_users}}</h2>
-    <a href="#" class="card-link">Contributors</a>
-  </div>
-</div>
-{%endif%}
-
-</div>
+<script>
+    // Sample data for Chart.js
+    const ctx = document.getElementById('dataChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Food Available', 'Donations Made', 'Total Requests', 'Total Contributors'],
+            datasets: [{
+                label: 'Metrics',
+                data: [{{ total_people }}, {{ total_count }}, {{ total_request }}, {{ total_users }}],
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
 {% endblock %}

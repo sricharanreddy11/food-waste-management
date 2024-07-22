@@ -1,22 +1,34 @@
 {% extends "home/index.html" %}
 
-{%block block%}
-<div class="container" style="display : flex; flex-direction: column; gap: 30px">
-<ul class="list-group ">
-  <li class="list-group-item active">Donor Name: {{contribution.donor_name}}</li>
-  <li class="list-group-item">Contact Number : {{contribution.phone}}</li>
-  <li class="list-group-item">Email : {{contribution.email}}</li>
-  <li class="list-group-item">Address to Visit : {{contribution.address}}</li>
-  <li class="list-group-item">Available for {{contribution.people}} Members</li>
-</ul>
-  <div class="container" style="display:flex; justify-content: space-between">
-  {%if contribution.user == request.user%}
-<a href="/available/{{contribution.id}}/update/" class="btn btn-success" style="width: 15vw">Update</a>
-<a href="/chat/{{contribution.id}}/" class="btn btn-primary container" style="width: 15vw">Requests</a>
-<a href="/available/{{contribution.id}}/delete/" class="btn btn-danger"  style="width: 15vw">Delete</a>
-    {%else%}
-<a href="/chat/{{contribution.id}}/" class="btn btn-primary container" style="width: 15vw">Chat Now</a>
-    {%endif%}
+{% block block %}
+<div class="container mx-auto py-8 space-y-6">
+  <ul class="bg-white shadow-lg rounded-lg overflow-hidden">
+    <li class="bg-blue-700 text-white py-4 px-6 font-bold">Donor Name: <span class="font-normal">{{ contribution.donor_name }}</span></li>
+    <li class="py-4 px-6 border-b border-gray-200"><span class="font-bold">Contact Number:</span> {{ contribution.phone }}</li>
+    <li class="py-4 px-6 border-b border-gray-200"><span class="font-bold">Email:</span> {{ contribution.email }}</li>
+    <li class="py-4 px-6 border-b border-gray-200"><span class="font-bold">Address to Visit:</span> {{ contribution.address }}</li>
+    <li class="py-4 px-6"><span class="font-bold">Available for:</span> {{ contribution.people }} Members</li>
+  </ul>
+
+  <div class="flex justify-between space-x-4">
+    {% if contribution.user == request.user %}
+      <a href="/available/{{ contribution.id }}/update/" class="bg-green-500 text-white py-2 px-6 rounded-lg hover:bg-green-600 transition duration-300 w-1/3 text-center transform hover:scale-105">Update</a>
+      <a href="/chat/{{ contribution.id }}/" class="bg-blue-500 text-white py-2 px-6 rounded-lg hover:bg-blue-600 transition duration-300 w-1/3 text-center transform hover:scale-105">Requests</a>
+      <a href="/available/{{ contribution.id }}/delete/" class="bg-red-500 text-white py-2 px-6 rounded-lg hover:bg-red-600 transition duration-300 w-1/3 text-center transform hover:scale-105">Delete</a>
+    {% else %}
+      <a href="/chat/{{ contribution.id }}/" class="bg-blue-500 text-white py-2 px-6 rounded-lg hover:bg-blue-600 transition duration-300 w-full text-center transform hover:scale-105">Chat Now</a>
+    {% endif %}
   </div>
 </div>
+
+<script>
+  document.querySelectorAll('a').forEach(button => {
+    button.addEventListener('mouseover', () => {
+      button.classList.add('shadow-xl');
+    });
+    button.addEventListener('mouseout', () => {
+      button.classList.remove('shadow-xl');
+    });
+  });
+</script>
 {% endblock %}

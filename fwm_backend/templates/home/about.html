@@ -1,10 +1,13 @@
 {% extends "home/index.html" %}
 
 {% block block %}
-<div class="container">
-<h1>About Us</h1>
-    <p style="border: solid 5px black; padding: 20px 20px">
-        Share & Sustain is an organization committed to reducing food waste and alleviating hunger through an online platform. Donors list their excess food, and those in need can browse and request items. The platform matches donations with specific needs, prioritizing perishable items. Share & Sustain engages with communities to raise awareness and promote sustainable practices. By redistributing surplus food, the organization reduces waste and supports individuals facing food insecurity. Volunteers play a crucial role in collection, distribution, and outreach efforts. Share & Sustain invites individuals and businesses to join in their mission of sharing resources and sustaining communities through food.
-    </p>
-    </div>
+<div class="container mx-auto mt-8 p-6 bg-white rounded-lg shadow-lg">
+  <h1 class="text-4xl font-bold text-center mb-6">About Us</h1>
+  <p class="border-4  p-6 text-lg leading-relaxed">
+    Share & Sustain is an organization committed to reducing food waste and alleviating hunger through an online platform. Donors list their excess food, and those in need can browse and request items. The platform matches donations with specific needs, prioritizing perishable items. Share & Sustain engages with communities to raise awareness and promote sustainable practices. By redistributing surplus food, the organization reduces waste and supports individuals facing food insecurity. Volunteers play a crucial role in collection, distribution, and outreach efforts. Share & Sustain invites individuals and businesses to join in their mission of sharing resources and sustaining communities through food.
+  </p>
+  <div class="flex justify-center mt-8">
+    <a href="/contribute/" class="bg-blue-500 text-white py-2 px-4 rounded-lg shadow hover:bg-blue-600 transition duration-300">Contribute</a>
+  </div>
+</div>
 {% endblock %}

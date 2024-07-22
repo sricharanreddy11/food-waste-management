@@ -2,41 +2,43 @@
 
 {% block block %}
 {% for message in messages %}
-      <div class="p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3">
-        <p>{{ message }}</p>
-        </div>
+  <div class="p-3 text-blue-700 bg-blue-100 border border-blue-200 rounded-lg mb-4">
+    <p>{{ message }}</p>
+  </div>
 {% endfor %}
-<nav class="navbar bg-body-tertiary container center">
-  <div class="container-fluid container">
-    <form class="d-flex container" role="search">
-      <input class="form-control me-2" name="search" type="search" placeholder="Search Address" aria-label="Search">
+
+<nav class="bg-gray-100 py-4 mb-6">
+  <div class="container mx-auto flex justify-center">
+    <form class="w-full max-w-lg flex" role="search">
+      <input class="form-input w-full rounded-l-lg border-gray-300 p-2" name="search" type="search" placeholder="Search Address" aria-label="Search">
       <button class="btn btn-outline-success" type="submit">Search</button>
     </form>
   </div>
 </nav>
 
-<table class="table table-bordered container">
-  <thead>
-    <tr>
-      <th scope="col">Sno.</th>
-      <th scope="col">Address </th>
-      <th scope="col">Food Available for </th>
-      <th scope="col">Actions </th>
-    </tr>
-  </thead>
-  <tbody>
-  {% for contribution in contributions%}
-    <tr>
-      <th scope="row">{{forloop.counter}}</th>
-      <td>{{contribution.address}}</td>
-      <td>{{contribution.people}}</td>
-      <td>
-
-        <a href="/available/{{contribution.id}}/" class="btn btn-info">View</a>
-      </td>
-    </tr>
-  {% endfor %}
-  </tbody>
-</table>
+<div class="container mx-auto">
+  <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+    <thead class="bg-gray-100">
+      <tr>
+        <th class="py-3 px-4 text-left">Sno.</th>
+        <th class="py-3 px-4 text-left">Address</th>
+        <th class="py-3 px-4 text-left">Food Available for</th>
+        <th class="py-3 px-4 text-left">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for contribution in contributions %}
+        <tr class="border-b border-gray-200">
+          <td class="py-3 px-4">{{ forloop.counter }}</td>
+          <td class="py-3 px-4">{{ contribution.address }}</td>
+          <td class="py-3 px-4">{{ contribution.people }}</td>
+          <td class="py-3 px-4">
+            <a href="/available/{{ contribution.id }}/" class="bg-blue-500 text-white px-3 py-1 rounded-lg hover:bg-blue-600 transition duration-300">View</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
 
 {% endblock %}
