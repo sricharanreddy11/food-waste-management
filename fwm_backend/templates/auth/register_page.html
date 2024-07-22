@@ -1,0 +1,55 @@
+{% extends "home/index.html" %}
+
+{%block block%}
+<div class="container">
+ <div class="row justify-content-center ">
+  <div class="form-group col-md-5 col-md-offset-7 align-center ">
+
+    {% if messages %}
+    <div class="container">
+    <div class="p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3">
+        {% for message in messages %}
+        <p>{{ message }}</p>
+        {% endfor %}
+    </div>
+        <br>
+    </div>
+    {% endif %}
+    <div class = "container">
+        <form class="border" style="padding: 10%" method="post" enctype="multipart/form-data" action="{% url 'register_page' %}">
+          {% csrf_token %}
+      <div class="mb-3">
+        <label for="first_name" class="form-label">First Name</label>
+        <input type="text" required class="form-control" name="first_name" id="first_name" aria-describedby="emailHelp">
+      </div>
+      <div class="mb-3">
+        <label for="last_name" class="form-label">Last Name</label>
+        <input type="text" required class="form-control" name="last_name" id="last_name" aria-describedby="emailHelp">
+      </div>
+       <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input type="text" name="username" required class="form-control" id="username" aria-describedby="emailHelp">
+      </div>
+      <div class="mb-3">
+       <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" name="email" required class="form-control" id="email" aria-describedby="emailHelp">
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input type="password" required class="form-control" name="password1" id="exampleInputPassword1">
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword2" class="form-label">Re-enter Password</label>
+        <input type="password" required class="form-control" name="password2" id="exampleInputPassword2">
+      </div>
+      <div class="mb-3">
+          <p>Already have an Account :<a class="btn" href="/auth/login_page/">Login</a></p>
+      </div>
+      <button type="submit"  class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+       </div>
+ </div>
+</div>
+{% endblock %}

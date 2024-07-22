@@ -1,0 +1,18 @@
+{% extends "home/index.html" %}
+
+{%block block%}
+
+<div class="center">
+	<form class="border" style="padding: 10%" method="post" class="card">
+		{% csrf_token %}
+		<h2>Delete Contribution</h2>
+		<p>Are you sure that you want to delete food of {{contribution.people}} people"?</p>
+		<p class="form-buttons">
+			<input type="submit" class="btn btn-primary" value="Delete">
+			<a href="{% url 'availability'%}" class="btn btn-outline">Cancel</a>
+		</p>
+	</form>
+</div>
+
+
+{% endblock %}

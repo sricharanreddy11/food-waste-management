@@ -1,0 +1,30 @@
+{% extends "home/index.html" %}
+
+{% block block %}
+<div class = "container" style="display : flex;flex-direction: column; justify-content: center; align-items : center;justify-content :space-between ; height : 80vh">
+<div class = "container" style="display : flex; justify-content: center; align-self : center;justify-content :space-around">
+<div class="card text-center" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Contribute</h5>
+    <p class="card-text">Join us in the fight against food waste! Share your surplus meals, make a difference. Contribute now and help nourish those in need</p>
+    <a href="/contribute/" class="btn btn-primary">contribute</a>
+  </div>
+</div>
+
+<div class="card text-center" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Available</h5>
+    <p class="card-text"> Lend a helping hand by delivering surplus food to those who need it most.Become a part of our mission eliminate food waste</p>
+    <a href="/available/" class="btn btn-primary">available</a>
+  </div>
+</div>
+</div>
+
+<div class="card text-bg-success mb-3" style="max-width: 80rem;">
+  <div class="card-body">
+    <h5 class="card-title">Every Contribution and Delivery makes Impact</h5>
+    <p class="card-text">Food Available currently for {{total_people}} Members</p>
+  </div>
+</div>
+  </div>
+{% endblock %}

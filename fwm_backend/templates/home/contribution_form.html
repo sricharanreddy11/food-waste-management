@@ -1,0 +1,42 @@
+{% extends "home/index.html" %}
+
+{%block block%}
+<div class="container">
+ <div class="row justify-content-center ">
+  <div class="form-group col-md-5 col-md-offset-7 align-center ">
+ <div class = "container">
+    <form class="border" style="padding: 10%" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+        {% for message in messages %}
+      <div class="p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3">
+        <p>{{ message }}</p>
+        </div>
+            {% endfor %}
+  <div class="mb-3">
+    <label for="donor-name" class="form-label">Contributor-Name: </label>
+    <input type="text" class="form-control" required id="donor-name" aria-describedby="emailHelp" name="donor_name" value="{{query.donor_name}}">
+  </div>
+  <div class="mb-3">
+    <label for="floatingTextarea">Address: </label>
+    <textarea class="form-control" required placeholder="Add the respective Address to Visit" id="floatingTextarea" name="address">{{query.address}}</textarea>
+  </div>
+  <div class="mb-3">
+    <label for="phone" class="form-label">Phone Number: </label>
+    <input type="text" class="form-control" required id="phone" aria-describedby="emailHelp" name="phone" value="{{query.phone}}">
+  </div>
+  <div class="mb-3">
+    <label for="email" class="form-label">Email-Id: </label>
+    <input type="email" class="form-control" required id="email" aria-describedby="emailHelp" name="email" value="{{query.email}}">
+  </div>
+  <div class="mb-3">
+    <label for="people" class="form-label">No. Of People : </label>
+    <input type="number" class="form-control" required id="people" aria-describedby="emailHelp" name="people" value="{{query.people}}">
+  </div>
+  <button type="submit" class="btn btn-primary">Update</button>
+    </form>
+    </div>
+  </div>
+ </div>
+</div>
+
+{% endblock %}

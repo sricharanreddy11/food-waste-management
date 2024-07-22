@@ -1,0 +1,42 @@
+{% extends "home/index.html" %}
+
+{% block block %}
+{% for message in messages %}
+      <div class="p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3">
+        <p>{{ message }}</p>
+        </div>
+{% endfor %}
+<nav class="navbar bg-body-tertiary container center">
+  <div class="container-fluid container">
+    <form class="d-flex container" role="search">
+      <input class="form-control me-2" name="search" type="search" placeholder="Search Address" aria-label="Search">
+      <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+
+<table class="table table-bordered container">
+  <thead>
+    <tr>
+      <th scope="col">Sno.</th>
+      <th scope="col">Address </th>
+      <th scope="col">Food Available for </th>
+      <th scope="col">Actions </th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for contribution in contributions%}
+    <tr>
+      <th scope="row">{{forloop.counter}}</th>
+      <td>{{contribution.address}}</td>
+      <td>{{contribution.people}}</td>
+      <td>
+
+        <a href="/available/{{contribution.id}}/" class="btn btn-info">View</a>
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

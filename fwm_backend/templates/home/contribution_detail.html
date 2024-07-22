@@ -1,0 +1,22 @@
+{% extends "home/index.html" %}
+
+{%block block%}
+<div class="container" style="display : flex; flex-direction: column; gap: 30px">
+<ul class="list-group ">
+  <li class="list-group-item active">Donor Name: {{contribution.donor_name}}</li>
+  <li class="list-group-item">Contact Number : {{contribution.phone}}</li>
+  <li class="list-group-item">Email : {{contribution.email}}</li>
+  <li class="list-group-item">Address to Visit : {{contribution.address}}</li>
+  <li class="list-group-item">Available for {{contribution.people}} Members</li>
+</ul>
+  <div class="container" style="display:flex; justify-content: space-between">
+  {%if contribution.user == request.user%}
+<a href="/available/{{contribution.id}}/update/" class="btn btn-success" style="width: 15vw">Update</a>
+<a href="/chat/{{contribution.id}}/" class="btn btn-primary container" style="width: 15vw">Requests</a>
+<a href="/available/{{contribution.id}}/delete/" class="btn btn-danger"  style="width: 15vw">Delete</a>
+    {%else%}
+<a href="/chat/{{contribution.id}}/" class="btn btn-primary container" style="width: 15vw">Chat Now</a>
+    {%endif%}
+  </div>
+</div>
+{% endblock %}
