@@ -29,15 +29,13 @@ STATIC_DIR = BASE_DIR.joinpath("static")
 SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
 # Application definition
 
 INSTALLED_APPS = [
-    'daphne',
-    'channels',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -83,13 +81,13 @@ TEMPLATES = [
     },
 ]
 
-# WSGI_APPLICATION = 'fwm.wsgi.application'
-ASGI_APPLICATION = 'fwm.asgi.application'
-CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': "channels.layers.InMemoryChannelLayer"
-    }
-}
+WSGI_APPLICATION = 'fwm.wsgi.application'
+# ASGI_APPLICATION = 'fwm.asgi.application'
+# CHANNEL_LAYERS = {
+#     'default': {
+#         'BACKEND': "channels.layers.InMemoryChannelLayer"
+#     }
+# }
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
